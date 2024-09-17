@@ -1,9 +1,7 @@
 <template>
   <section class="fishka">
     <YMap />
-    <div class="auth">
-      <AuthControls />
-    </div>
+    <AuthControls />
     <FkModal ref="modal" />
   </section>
 </template>
@@ -21,10 +19,5 @@ provide('modal', modal);
 <style lang="scss" scoped>
 .fishka {
   position: relative;
-}
-.auth {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
 }
 </style>

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { IUser } from '@/shared/types';
+import { authService } from '@/api/authService';
 
 interface IAuthStore {
   user: IUser | null;
@@ -13,6 +14,31 @@ export const useAuthStore = defineStore('auth', {
   }),
   getters: {},
   actions: {
-    // async register(name: string, password: string) {},
+    async register(name: string, email: string, password: string) {
+      const service = authService();
+
+      try {
+        const response = await service.register(name, email, password);
+        return response.message;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async login(name: string, password: string) {
+      const service = authService();
+
+      try {
+        const user = await service.login(name, password);
+        this.user = { id: user.id, name: user.name };
+        this.token = user.token;
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    logout() {
+      this.user = null;
+      this.token = null;
+    },
   },
 });

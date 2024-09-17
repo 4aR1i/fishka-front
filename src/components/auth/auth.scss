@@ -1,0 +1,147 @@
+.auth {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0.15rem 0.4rem rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.1s ease-out;
+
+  &:hover {
+    box-shadow: 0 0.15rem 0.65rem rgba(0, 0, 0, 0.2);
+  }
+}
+
+.user {
+  cursor: pointer;
+
+  &:hover .user__options {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.options {
+  position: absolute;
+  right: 0;
+  top: 110%;
+  opacity: 0;
+  transform: translateY(5px);
+  padding: 0.3rem 0.6rem;
+  box-shadow: 0 0.15rem 0.4rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.35rem;
+  background-color: #fff;
+  list-style: none;
+  transition: all 0.2s ease-out;
+
+  &__item {
+    font-size: 0.8rem;
+    cursor: pointer;
+
+    &--exit {
+      color: rgb(206, 31, 31);
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  &__register {
+    background-color: rgb(0, 94, 255);
+    color: #ffffff;
+    border-radius: 0.4rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  & span {
+    font-size: 0.8rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 350px;
+
+  .form__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 15px 0;
+
+    .form__control {
+      display: grid;
+      grid-template-columns: max(70px) 1fr;
+      align-items: center;
+
+      & label {
+        font-size: 0.8rem;
+        color: #4d4d4d;
+      }
+
+      & input {
+        border: 1px solid #cecdcd;
+        border-radius: 0.25rem;
+        outline: none;
+        transition: box-shadow 0.1s ease-out;
+        padding: 0.2rem 0.5rem;
+        font-size: 0.8rem;
+
+        &:focus {
+          box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+  }
+
+  .form__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+    .btn {
+      padding: 0.3rem 0.6rem;
+      border-radius: 0.3rem;
+      border: none;
+      cursor: pointer;
+
+      &--default {
+        background-color: #fff;
+        border: 1px solid #cecdcd;
+
+        &:active {
+          background-color: darken(#d3d3d3, 0.1);
+        }
+      }
+
+      &--primary {
+        background-color: rgb(0, 94, 255);
+        color: #fff;
+
+        &:active {
+          background-color: rgb(0, 64, 175);
+        }
+      }
+    }
+  }
+
+  .form__success {
+    font-size: 0.8rem;
+
+    & span {
+      font-size: inherit;
+      color: rgb(2, 82, 220);
+      cursor: pointer;
+    }
+  }
+}
