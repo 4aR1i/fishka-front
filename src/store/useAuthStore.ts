@@ -36,9 +36,26 @@ export const useAuthStore = defineStore('auth', {
         console.log(error);
       }
     },
-    logout() {
+    async logout() {
+      const service = authService();
       this.user = null;
       this.token = null;
+
+      try {
+        await service.logout();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async refreshAccessToken() {
+      const service = authService();
+
+      try {
+        const accessToken = await service.refreshToken();
+        this.token = accessToken;
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 });

@@ -26,8 +26,28 @@ export const authService = () => {
     }
   };
 
+  const logout = async () => {
+    try {
+      const response = await api.post('/auth/logout');
+      return response.data;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+
+  const refreshToken = async () => {
+    try {
+      const response = await api.post('/auth/token');
+      return response.data;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+
   return {
     register,
     login,
+    logout,
+    refreshToken,
   };
 };
