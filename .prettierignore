@@ -1,0 +1,8 @@
+.output
+.nuxt
+**/dist
+**/config
+**/public
+README.md
+
+node_modules
