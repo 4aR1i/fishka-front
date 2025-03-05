@@ -2,7 +2,7 @@ import { defineNuxtConfig } from 'nuxt/config';
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-03-01',
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   modules: ['@nuxt/eslint', 'nuxt-icons'],
   srcDir: 'src/',
   runtimeConfig: {
@@ -14,13 +14,23 @@ export default defineNuxtConfig({
     ssr: {
       noExternal: ['vue-yandex-maps'],
     },
+    plugins: [
+      {
+        name: 'vite-plugin-glob-transform',
+        transform(code: string, id: string) {
+          if (id.includes('nuxt-icons')) {
+            return code.replace(/as:\s*['"]raw['"]/g, 'query: "?raw", import: "default"');
+          }
+        },
+      },
+    ],
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "@/assets/styles/_variables.scss";`,
+          additionalData: '@use "@/assets/styles/_variables.scss" as *;',
         },
       },
     },
   },
-  css: ['@/assets/styles/styles.scss'],
+  css: ['@/assets/styles/main.scss'],
 });
