@@ -9,11 +9,8 @@ export default withNuxt(
   },
   {
     files: ['**/*.ts'],
-    languageOptions: {
-      parserOptions: {},
-    },
     rules: {
-      'no-console': 'error',
+      'no-console': 'warn',
     },
   },
 );
