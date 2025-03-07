@@ -1,5 +1,6 @@
 <template>
   <main class="layout">
+    <ButtonTheme />
     <BottomMenu />
     <slot />
     <YMap />
