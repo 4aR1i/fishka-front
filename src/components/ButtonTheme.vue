@@ -1,5 +1,5 @@
 <template>
-    <button :class="['button-theme', {'button-theme_dark': isDark}]" @click="toggleDark()">
+    <button v-if="isLoaded" :class="['button-theme', {'button-theme_dark': isDark}]" @click="toggleDark()">
         <div class="button-theme__wrapper">
             <WeatherSunny24Filled :class="['button-theme__sun', {'button-theme__sun_active': !isDark}]" />
             <WeatherMoon24Filled :class="['button-theme__moon', {'button-theme__moon_active': isDark}]" />
@@ -14,21 +14,24 @@ import { WeatherSunny24Filled, WeatherMoon24Filled } from '@vicons/fluent';
 import { useDark, useToggle } from '@vueuse/core';
 
 const isLoaded = ref(false)
-const isDark = useDark({
+const themeDark = useDark({
     attribute: 'color-scheme',
     valueDark: 'dark',
     valueLight: 'light',
     storageKey: 'dark-theme',
 });
+const isDark = ref(themeDark.value)
 
-const toggleDark = useToggle(isDark)
+const toggleDark = useToggle(themeDark)
 
 onMounted(() => {
   isLoaded.value = true;
 });
 
-watch(isDark, (value) => {
-    console.log({value})
+watch(themeDark, (value) => {
+    nextTick(() => {
+        isDark.value = value;
+    });
 });
 
 </script>
@@ -60,10 +63,14 @@ watch(isDark, (value) => {
         height: 100%;
         width: 50%;
         display: flex;
-        animation: animationToLight 0.3s ease forwards;
+        will-change: transform;
+        transform: translateX(0);
+        transition: transform 0.3s ease;
+        // animation: animationToLight 0.3s ease forwards;
 
         .button-theme_dark & {
-            animation: animationToDark 0.3s ease forwards;
+            transform: translateX(40px);
+            // animation: animationToDark 0.3s ease forwards;
         }
 
         &::before {
