@@ -1,5 +1,5 @@
 <template>
-    <button v-if="isLoaded" :class="['button-theme', {'button-theme_dark': isDark}]" @click="toggleDark()">
+    <button v-if="isLoaded" :class="['button-theme', {'button-theme_dark': isDark}]" @click="toggleTheme()">
         <div class="button-theme__wrapper">
             <WeatherSunny24Filled :class="['button-theme__sun', {'button-theme__sun_active': !isDark}]" />
             <WeatherMoon24Filled :class="['button-theme__moon', {'button-theme__moon_active': isDark}]" />
@@ -11,24 +11,18 @@
 
 <script setup lang="ts">
 import { WeatherSunny24Filled, WeatherMoon24Filled } from '@vicons/fluent';
-import { useDark, useToggle } from '@vueuse/core';
+import { useTheme } from '~/composables/useTheme';
+
+const { isThemeDark, toggleTheme } = useTheme()
 
 const isLoaded = ref(false)
-const themeDark = useDark({
-    attribute: 'color-scheme',
-    valueDark: 'dark',
-    valueLight: 'light',
-    storageKey: 'dark-theme',
-});
-const isDark = ref(themeDark.value)
-
-const toggleDark = useToggle(themeDark)
+const isDark = ref(isThemeDark.value)
 
 onMounted(() => {
   isLoaded.value = true;
 });
 
-watch(themeDark, (value) => {
+watch(isThemeDark, (value) => {
     nextTick(() => {
         isDark.value = value;
     });

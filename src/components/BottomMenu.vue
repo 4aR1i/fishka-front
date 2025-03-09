@@ -35,7 +35,7 @@ const activeElementIndex = ref(0);
   z-index: 1;
   width: 100%;
   height: 64px;
-  background-color: $background-sidebar;
+  background-color: var(--background);
   box-shadow: 0px 4px 10px #000;
 
   &__list {
@@ -47,7 +47,7 @@ const activeElementIndex = ref(0);
 
 .element {
   padding: 8px;
-  color: $secondary-text;
+  color: var(--color-secondary);
   cursor: pointer;
 
   &__link {
@@ -63,7 +63,7 @@ const activeElementIndex = ref(0);
   }
 
   &--active {
-    color: $primary-text;
+    color: var(--color-primary);
   }
 }
 

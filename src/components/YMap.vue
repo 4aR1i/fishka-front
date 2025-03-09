@@ -6,9 +6,10 @@
           center: [41.9733, 45.0428],
           zoom: 9,
         },
+        theme: themeMap
       }"
       height="100vh">
-      <yandex-map-default-scheme-layer :settings="{ theme: 'light' }" />
+      <yandex-map-default-scheme-layer />
       <yandex-map-default-features-layer />
       <yandex-map-controls :settings="{ position: 'right' }">
         <yandex-map-zoom-control />
@@ -35,8 +36,10 @@ import {
   YandexMapMarker,
 } from 'vue-yandex-maps';
 import type { IFishingSpot } from '@/types/FishingSpot';
+import { useTheme } from '~/composables/useTheme';
 
 const router = useRouter();
+const { themeMap } = useTheme()
 
 const spots: IFishingSpot[] = [
   {
