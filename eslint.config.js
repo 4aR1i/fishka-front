@@ -7,4 +7,15 @@ export default withNuxt(
       'no-console': 'warn',
     },
   },
+  {
+    files: ['*.vue', '**/*.vue'],
+    languageOptions: {
+      parserOptions: {
+        parser: '@typescript-eslint/parser'
+      }
+    },
+    rules: {
+      "@typescript-eslint/no-unused-vars": "warn",
+    }
+  }
 );
