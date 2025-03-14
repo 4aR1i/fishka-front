@@ -17,9 +17,10 @@
       <yandex-map-marker
         v-for="spot in spots"
         :key="spot.id"
+        :position="'top-center left-center'"
         :settings="{ coordinates: spot.coordinates }"
         @click="goToSpot(spot.id)">
-        <span style="color: green; cursor: pointer">{{ spot.name }}</span>
+        <IconLocation class="map__marker" />
       </yandex-map-marker>
     </yandex-map>
   </div>
@@ -52,3 +53,15 @@ function goToSpot(id: number) {
   router.push({ name: 'spot-id', params: { id } });
 }
 </script>
+
+<style lang="scss" scoped>
+.map {
+
+  &__marker {
+    width: 36px;
+    height: auto;
+    color: #29ba29;
+    cursor: pointer;
+  }
+}
+</style>
